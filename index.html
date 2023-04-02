@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wordle</title>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="header">
+      <span class="header-title">WORDLE</span>
+      <svg class="header-stats" xmlns="http://www.w3.org/2000/svg"viewBox="0 0 24 24" onclick="showStatScreen()">
+        <path fill="var(--color-tone-3)" d="M16,11V3H8v6H2v12h20V11H16z M10,5h4v14h-4V5z M4,11h4v8H4V11z M20,19h-4v-6h4V19z"></path>
+      </svg>
+      <i class="fa fa-refresh header-refresh" onclick="refreshPage()"></i>
+    </div>
+    <div id="popup">Text</div>
+    <div id="statScreen">
+      <i class="fa fa-times statScreen-X" onclick="hideStatScreen()"></i>
+      <span>STATISTICS</span>
+      <div class="statScreen-stats">
+        <div class="statScreen-stats-container">
+          <div class="statScreen-statistic">
+            1
+          </div>
+          <div class="statScreen-label">
+            <span>Played</span> 
+          </div>
+        </div>
+        <div class="statScreen-stats-container">
+          <div class="statScreen-statistic">
+            100
+          </div>
+          <div class="statScreen-label">
+            <span>Win %</span> 
+          </div>
+        </div>
+        <div class="statScreen-stats-container">
+          <div class="statScreen-statistic">
+            1
+          </div>
+          <div class="statScreen-label">
+            <span>Current</span> 
+            <span>Streak</span> 
+          </div>
+        </div>
+        <div class="statScreen-stats-container">
+          <div class="statScreen-statistic">
+            4
+          </div>
+          <div class="statScreen-label">
+            <span>Max</span> 
+            <span>Streak</span> 
+          </div>
+        </div>
+      </div>
+      <div class="statScreen-guesses">
+        <span>GRAPH HERE</span>
+      </div>
+      <div class="statScreen-actions">
+        <button class="statScreen-button green" onclick="refreshPage()">
+          <span>PLAY AGAIN!</span>
+          <i class="fa fa-refresh statScreen-refresh"></i>
+        </button>
+        <div class="statScreen-Divider"></div>
+        <button class="statScreen-button gray">
+          <span>...</span>
+        </button>
+      </div>
+    </div>
+    <div class="board">
+      <!-- ROW -->
+      <div class="board-row">
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="board-row">
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="board-row">
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="board-row">
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="board-row">
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="board-row">
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+        <div class="board-tile">
+          <div class="board-tile-content">
+            <div class="board-tile-content-front"></div>
+            <div class="board-tile-content-back">t</div>
+          </div>
+        </div>
+      </div>
+      <!-- END -->
+    </div>
+    <div class="keyboard">
+      <!-- ROW -->
+      <div class="keyboard-row">
+        <div class="keyboard-tile">Q</div>
+        <div class="keyboard-tile">W</div>
+        <div class="keyboard-tile">E</div>
+        <div class="keyboard-tile">R</div>
+        <div class="keyboard-tile">T</div>
+        <div class="keyboard-tile">Y</div>
+        <div class="keyboard-tile">U</div>
+        <div class="keyboard-tile">I</div>
+        <div class="keyboard-tile">O</div>
+        <div class="keyboard-tile">P</div>
+      </div>
+      <!-- ROW -->
+      <div class="keyboard-row">
+        <div class="keyboard-tile-half"></div>
+        <div class="keyboard-tile">A</div>
+        <div class="keyboard-tile">S</div>
+        <div class="keyboard-tile">D</div>
+        <div class="keyboard-tile">F</div>
+        <div class="keyboard-tile">G</div>
+        <div class="keyboard-tile">H</div>
+        <div class="keyboard-tile">J</div>
+        <div class="keyboard-tile">K</div>
+        <div class="keyboard-tile">L</div>
+        <div class="keyboard-tile-half"></div>
+      </div>
+      <!-- ROW -->
+      <div class="keyboard-row">
+        <div class="keyboard-tile keyboard-tile-big">ENTER</div>
+        <div class="keyboard-tile">Z</div>
+        <div class="keyboard-tile">X</div>
+        <div class="keyboard-tile">C</div>
+        <div class="keyboard-tile">V</div>
+        <div class="keyboard-tile">B</div>
+        <div class="keyboard-tile">N</div>
+        <div class="keyboard-tile">M</div>
+        <div class="keyboard-tile keyboard-tile-big">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svelte-bldt10"><path d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z"></path></svg>
+        </div>
+      </div>
+      <!-- END -->
+    </div>
+    <script>
+      const popupElement = document.querySelector('#popup');
+      // get all elements with the class 'board-tile-content-front'
+      const frontElements = document.querySelectorAll('.board-tile-content');
+
+      const frontElementsArray = Array.from(frontElements);
+
+      const keyboardElements = document.querySelectorAll('.keyboard-tile');
+
+      const keyboardElementsArray = Array.from(keyboardElements);
+      let keyboardElementsArrayLetters = [];
+
+      const rowElements = document.querySelectorAll('.board-row');
+      const rowElementsArray = Array.from(rowElements);
+    
+      for (let i = 0; i < keyboardElementsArray.length; i++) {
+        keyboardElementsArrayLetters.push(keyboardElementsArray[i].outerText);
+      }
+
+      keyPressCount = 0;
+      randomWord = '';
+      stat = '';
+      guessCount = '0';
+      
+      // Fetch the words.txt file and get a random word from it
+      fetch('words.txt')
+        .then(response => response.text())
+        .then(data => {
+          const words = data.split(' ');
+          const randomIndex = Math.floor(Math.random() * words.length);
+          randomWord = words[randomIndex];
+          console.log(randomWord);
+        });
+
+        function loadAllWords() {
+          return new Promise(function(resolve, reject) {
+            $.get("all-words.txt", function(data) {
+              var allWords = data.split(' ');
+              resolve(allWords); // resolve the Promise with the allWords array
+            });
+          });
+        }
+
+        allWordsArr = [];
+        loadAllWords().then(function(allWords) {
+          allWordsArr = allWords
+        });
+
+        
+      document.addEventListener('keydown', async function(event) {
+        enterKey(event);
+      });
+
+      keyboardElementsArray.forEach(key => {
+        key.addEventListener('click', () => {
+          if (key.querySelector('svg')) {
+            customEvent = new KeyboardEvent('keydown', {keyCode: 8, key: 'BACKSPACE'});
+            enterKey(customEvent);
+          } else if(key.textContent === 'ENTER') {
+            customEvent = new KeyboardEvent('keydown', {keyCode: 13, key: 'ENTER'});
+            enterKey(customEvent);
+          } else {
+            customEvent = new KeyboardEvent('keydown', {keyCode: key.textContent.toUpperCase().charCodeAt(0), key: key.textContent});
+            enterKey(customEvent);
+          }
+        });
+      });
+
+      async function enterKey(event) {
+        if(stat == 'end') {
+          return;
+        }
+
+        if(frontElementsArray.length > 0) {
+          if(keyPressCount < 5 && event.keyCode >= 65 && event.keyCode <= 90) {
+            // Detect if letter key is pressed and enter it in the next field
+            frontElementsArray[keyPressCount].childNodes[1].textContent = event.key.toLocaleUpperCase();
+            frontElementsArray[keyPressCount].childNodes[3].textContent = event.key.toLocaleUpperCase();
+            frontElementsArray[keyPressCount].classList.toggle('pop');
+            keyPressCount++;
+          } else if(event.keyCode === 8 && keyPressCount > 0) {
+            // Detect if backspace key is pressed and remove last letter
+            frontElementsArray[keyPressCount-1].childNodes[1].textContent = '';
+            frontElementsArray[keyPressCount-1].childNodes[3].textContent = '';
+            frontElementsArray[keyPressCount-1].classList.toggle('pop');
+            keyPressCount--;
+          }
+
+          guess = '';
+          for (let i = 0; i < 5; i++) {
+            guess = guess+frontElementsArray[i].childNodes[1].textContent;
+          }
+
+          guess = guess.toLowerCase();
+
+          // Watch for enter
+          if(event.keyCode === 13 && keyPressCount === 5 && allWordsArr.includes(guess)) {          
+            guessCount++;
+
+            var storeContainingLetters1 = ['', '', '', '', ''];
+            var storeContainingLetters2 = ['', '', '', '', ''];
+            var storeContainingLetters3 = ['', '', '', '', ''];
+            
+            for (let i = 0; i < 5; i++) {
+              storeContainingLetters1[i] = guess.charAt(i);
+              storeContainingLetters2[i] = randomWord.charAt(i);
+            }
+            
+            for (let i = 0; i < 5; i++) {
+              if(storeContainingLetters1[i] === storeContainingLetters2[i]) {
+                storeContainingLetters2[i] = '1';
+                storeContainingLetters3[i] = '1';
+              }
+            }
+
+            for (let i = 0; i < 5; i++) {
+              if(storeContainingLetters2.includes(storeContainingLetters1[i]) && storeContainingLetters2[i] !== '1') {
+                storeContainingLetters3[i] = '0';
+                storeContainingLetters2[storeContainingLetters2.indexOf(storeContainingLetters1[i])] = '-';
+              } else if(storeContainingLetters2[i] !== '1') {
+                storeContainingLetters3[i] = '-';
+              }
+            }
+
+            await flipCards(storeContainingLetters3, storeContainingLetters1);
+
+            // Splice out the 5 elements of the row
+            frontElementsArray.splice(0, 5);
+            keyPressCount = 0;
+            if (randomWord === guess) {
+              stat = 'end';
+              popup('Well done!', false);
+            } else if(guessCount === 6) {
+              stat = 'end';
+              popup(randomWord, false);
+            }          
+          } else if(event.keyCode === 13 && keyPressCount < 5) {
+            popup('Not enough letters', true);
+          } else if(event.keyCode === 13 && keyPressCount === 5 && !allWordsArr.includes(guess)) {
+            popup('Not in words list', true);
+          }
+        }
+      }
+
+      // Show popup with passed text
+      function popup(popupText, effectBool) {
+        popupElement.textContent = popupText;
+        if(effectBool === true) {
+          $( rowElementsArray[guessCount] ).effect( "shake", { direction: "left", times: 4, distance: 6}, 300 );
+        } else { 
+          showStatScreenAnim();
+        }
+        $(popupElement).fadeIn( 300 ).delay( 1000 ).fadeOut( 300 );
+      }
+
+      function showStatScreenAnim() {
+        $("#statScreen").css("display", "block");
+        var count = 3;
+        var countdown = setInterval(function() {
+          count--;
+          if (count < 0) {
+            clearInterval(countdown);
+            $("#statScreen").animate({opacity: 1}, 800);
+          }
+        }, 400);
+      }
+
+      function hideStatScreen(){
+        $("#statScreen").css("display", "none");
+        $("#statScreen").css("opacity", "0");
+      }
+
+      function showStatScreen(){
+        $("#statScreen").css("display", "block");
+        $("#statScreen").css("opacity", "1");
+      }
+
+      // Flip the tiles to the correct collor with animation
+      function flipCards(storeContainingLetters3, storeContainingLetters1) {
+        return new Promise(resolve => {
+          for (let i = 0; i < 5; i++) {
+            setTimeout(function() {
+              frontElementsArray[i].classList.toggle('flipped');
+              if(storeContainingLetters3[i] === '1') {
+                frontElementsArray[i].childNodes[3].classList.toggle('green');
+              } else if(storeContainingLetters3[i] === '0') {
+                frontElementsArray[i].childNodes[3].classList.toggle('yellow');
+              } else {
+                frontElementsArray[i].childNodes[3].classList.toggle('gray');
+              }
+
+              // Resolve the Promise after the last card is flipped
+              if (i === 4) {
+                resolve();
+              }
+            }, i * 200);
+          }
+          for (let i = 0; i < 5; i++) {
+            if(storeContainingLetters3[i] === '1') {
+                keyboardElementsArray[keyboardElementsArrayLetters.indexOf(storeContainingLetters1[i].toUpperCase())].classList.add('green');
+              } else if(storeContainingLetters3[i] === '0') {
+                keyboardElementsArray[keyboardElementsArrayLetters.indexOf(storeContainingLetters1[i].toUpperCase())].classList.add('yellow');
+              } else {
+                keyboardElementsArray[keyboardElementsArrayLetters.indexOf(storeContainingLetters1[i].toUpperCase())].classList.add('gray');
+              }
+          }
+        });
+      }
+
+      function refreshPage() {
+        location.reload();
+      }
+    </script>
+	  <script src="index.js"></script>
+  </body>
+</html>
