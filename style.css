@@ -176,7 +176,7 @@ body {
 
 @media only screen and (max-height: 666px) {
   .board {
-    width: 65%;
+    width: 270px;
   }
 }
 
